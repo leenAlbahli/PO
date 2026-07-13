@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HC Portal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f5f7;
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        /* ===== PARTICLES ===== */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            width: 100%;
+            max-width: 850px;
+            min-height: 500px;
+            display: flex;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            background: #fff;
+        }
+
+        /* ===== LEFT ===== */
+        .left {
+            flex: 1;
+            background: #D6C394;
+            color: white;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+            .logo-top img {
+                width: 70px;
+                object-fit: contain;
+            }
+
+        /* ===== WELCOME BOX ===== */
+        .welcome-box {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #c4ab73;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+
+            .welcome-box h1 {
+                font-size: 22px;
+            }
+
+            .welcome-box h2,
+            .welcome-box h3 {
+                font-size: 18px;
+            }
+
+            .welcome-box p {
+                font-size: 13px;
+                margin-top: 8px;
+            }
+
+        .arabic-text {
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        /* ===== RIGHT ===== */
+        .right {
+            flex: 1;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+            .right h2 {
+                font-size: 20px;
+                margin-bottom: 18px;
+                color: #413100;
+            }
+
+        /* ===== INPUT ===== */
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        /* ===== KEYPAD ===== */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+            .keypad button {
+                height: 45px;
+                border: none;
+                border-radius: 8px;
+                background: #D6C394;
+                color: #413100;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+        /* ===== ENTER ===== */
+        .enter-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #413100;
+            color: white;
+            font-size: 15px;
+        }
+        /* ===== TEAMS BUTTON ===== */
+        .teams-box {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            text-align: center;
+        }
+
+            .teams-box img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            .teams-box p {
+                color: #B4975B;
+                font-weight: 700;
+            }
+
+
+        .teams-box {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            text-align: center;
+            z-index: 9999;
+        }
+
+            /* الأيقونة */
+            .teams-box img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                cursor: pointer;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+                transition: 0.3s ease;
+            }
+
+                .teams-box img:hover {
+                    transform: scale(1.15);
+                }
+
+            /* النص */
+            .teams-box p {
+                margin-top: 10px;
+                font-size: 11px;
+                font-weight: 700;
+                color: #B4975B;
+                letter-spacing: 1px;
+                padding: 4px 10px;
+                border-radius: 20px;
+                background: rgba(180,151,91,0.12);
+                backdrop-filter: blur(6px);
+                display: inline-block;
+                transition: 0.3s ease;
+            }
+
+            /* hover للنص */
+            .teams-box:hover p {
+                background: linear-gradient(135deg,#413100,#B4975B);
+                color: white;
+                box-shadow: 0 5px 15px rgba(180,151,91,0.4);
+                transform: translateY(-2px);
+            }
+
+
+
+
+        @media screen and (max-width: 1024px) {
+
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                max-width: 95%;
+                min-height: auto;
+            }
+
+            .left,
+            .right {
+                padding: 20px;
+            }
+
+            .logo-top img {
+                width: 55px;
+            }
+
+            .welcome-box h1 {
+                font-size: 18px;
+            }
+
+            .welcome-box h2,
+            .welcome-box h3 {
+                font-size: 14px;
+            }
+
+            .welcome-box p {
+                font-size: 11px;
+            }
+
+            .keypad button {
+                height: 42px;
+                font-size: 15px;
+            }
+
+            .right h2 {
+                font-size: 18px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <canvas id="particles"></canvas>
+
+    <div class="container">
+
+        <!-- LEFT -->
+        <div class="left">
+
+            <div class="logo-top">
+                <img src="images/carrefourNewLogo-removebg-preview.png">
+                <img src="images/MAJEDALFUTTAIMNEW-removebg-preview.png">
+            </div>
+
+            <div class="welcome-box">
+                <h1>Welcome to HC Portal</h1>
+                <h2 class="arabic-text">مرحبا بك في بوابة الموظفين</h2>
+                <h3 class="arabic-text">ایچ سی پورٹل میں خوش آمدید</h3>
+
+                <p>Great moments for everyone, every day</p>
+                <p class="arabic-text">لحظات جميلة للجميع، كل يوم</p>
+                <p class="arabic-text">ہر کسی کے لیے ہر دن خوبصورت لمحات</p>
+               
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="right">
+
+            <h2>Employee Access دخول الموظفين</h2>
+
+            <input type="text" id="Employee_No" readonly autocomplete="off">
+
+            <div class="keypad" id="keypad"></div>
+
+            <button class="enter-btn" onclick="submitForm()">Enter Portal</button>
+
+          
+        </div>
+
+    </div>
+
+    <!-- ===== PARTICLES ===== -->
+    <script>
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5),
+                dy: (Math.random() - 0.5)
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#D6C39488";
+                ctx.fill();
+
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+
+
+
+
+    <!-- ===== KEYPAD + API ===== -->
+    <script>
+        const input = document.getElementById("Employee_No");
+
+        // مسح البيانات عند العودة لصفحة الدخول
+        window.addEventListener("pageshow", function (event) {
+            input.value = "";
+            sessionStorage.removeItem("empNo");
+            sessionStorage.removeItem("name");
+            sessionStorage.removeItem("department");
+        });
+
+
+
+        const keypad = document.getElementById("keypad");
+        const form = document.querySelector("form"); // تأكد عندك فورم
+
+        function createKeypad() {
+            keypad.innerHTML = "";
+
+            for (let i = 1; i <= 9; i++) {
+                let btn = document.createElement("button");
+                btn.innerText = i;
+                btn.type = "button";
+                btn.onclick = () => input.value += i;
+                keypad.appendChild(btn);
+            }
+
+            let zero = document.createElement("button");
+            zero.innerText = "0";
+            zero.type = "button";
+            zero.onclick = () => input.value += "0";
+            keypad.appendChild(zero);
+
+            let back = document.createElement("button");
+            back.innerText = "⌫";
+            back.type = "button";
+            back.onclick = () => input.value = input.value.slice(0, -1);
+            keypad.appendChild(back);
+
+            let clear = document.createElement("button");
+            clear.innerText = "Clear";
+            clear.type = "button";
+            clear.onclick = () => input.value = "";
+            keypad.appendChild(clear);
+        }
+
+        createKeypad();
+
+
+        // ✅ دعم الكيبورد الحقيقي
+        document.addEventListener("keydown", (e) => {
+
+            // أرقام من الكيبورد
+            if (e.key >= "0" && e.key <= "9") {
+                input.value += e.key;
+            }
+
+            // Backspace
+            else if (e.key === "Backspace") {
+                input.value = input.value.slice(0, -1);
+            }
+
+            // Enter = submit
+            else if (e.key === "Enter") {
+                e.preventDefault();
+                submitForm();
+            }
+
+            // Escape = clear
+            else if (e.key === "Escape") {
+                input.value = "";
+            }
+        });
+
+
+        async function submitForm() {
+            const empNo = input.value.trim();
+
+            if (!empNo) {
+                alert("ادخل الرقم الوظيفي");
+                return;
+            }
+
+            try {
+
+                const API_BASE = "http://10.240.112.61:5074";
+                const url = `${API_BASE}/api/employee/${empNo}`;
+
+                console.log("Fetching:", url);
+
+                const res = await fetch(url);
+
+                if (!res.ok) {
+                    throw new Error("Employee not found");
+                }
+
+                const data = await res.json();
+
+                sessionStorage.setItem("empNo", data.empNo);
+                sessionStorage.setItem("name", data.name);
+                sessionStorage.setItem("department", data.department);
+
+                window.location.href = "test.html";
+
+            } catch (error) {
+                console.error(error);
+                alert("رقم الموظف غير صحيح أو السيرفر غير متصل");
+            }
+        }
+
+
+    </script>
+ 
+
+    <!-- ===== TEAMS ===== -->
+    <div class="teams-box">
+        <a href="msteams://teams.microsoft.com/meet/322936653069107?p=aT3143XLJP7XwVo6KT">
+
+            <img src="images/icons8-microsoft-teams-2019-48.png" alt="Teams">
+
+            <p>Connect Us</p>
+
+        </a>
+    </div>
+
+</body>
+</html>

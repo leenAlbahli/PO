@@ -1,0 +1,4323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrefour Portal </title>
+
+
+
+    <style>
+        /* ===== RESET ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        }
+
+        /* ===== BODY + DYNAMIC BACKGROUND ===== */
+        body {
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f6f2, #f1efe9);
+            position: relative;
+        }
+
+        /* Animated particles */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            width: 100%;
+            background-color: #D6C399;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: clamp(6px, 1vw, 12px) clamp(10px, 2vw, 25px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border-bottom: 2px solid #B4975B;
+            min-height: 65px;
+        }
+
+
+
+        .logo img {
+            height: clamp(35px, 4vw, 55px);
+            object-fit: contain;
+        }
+
+
+        .header-links {
+            display: flex;
+            gap: 50px;
+            font-weight: bold;
+            align-items: center;
+        }
+
+
+
+
+            .header-links button {
+                all: unset;
+                color: #413100;
+                cursor: pointer;
+                font-weight: bold;
+                transition: .3s;
+                text-align: center;
+                font-size: clamp(10px, 1vw, 14px);
+            }
+
+                .header-links button:hover {
+                    color: #B4975B;
+                }
+
+
+            .header-links span {
+                color: #413100;
+                cursor: pointer;
+                transition: .3s;
+            }
+
+                .header-links span:hover {
+                    color: #B4975B;
+                }
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 110px 15px 20px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #fffefc, #fffdf7);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 35px 70px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+
+            .hero:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+
+        /* English line */
+        .quick-actions:before {
+            content: "QUICK ACCESS SERVICES";
+            display: block;
+            font-size: 23px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: #B4975B;
+            margin-bottom: 8px;
+        }
+
+        /* Arabic line */
+        .quick-actions::after {
+            content: "خدمات الوصول السريع";
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: #413100;
+            margin-top: 8px;
+        }
+
+
+
+
+        @keyframes glowLine {
+            0% {
+                box-shadow: 0 0 10px #B4975B55;
+            }
+
+            100% {
+                box-shadow: 0 0 20px #B4975B88;
+            }
+        }
+        /* ===== ICON GRID ===== */
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 50px;
+            z-index: 2;
+            padding: 12px;
+            border: 3px solid #5A3E1B; /* حدود بنية غامقة */
+            border-radius: 15px;
+            background-color: #fffaf0; /* خلفية فاتحة داخل الإطار */
+        }
+
+        .icon-box {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #413100;
+            position: relative;
+            overflow: hidden;
+            transition: all .4s ease, transform .3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            min-height: 120px;
+        }
+
+            .icon-box:hover {
+                transform: translateY(-10px) translateY(-3px);
+                box-shadow: 0 25px 50px rgba(180,150,90,0.35);
+            }
+
+            .icon-box img {
+                width: 32px;
+                margin-bottom: 8px;
+                transition: .4s;
+            }
+
+
+            .icon-box:hover img {
+                transform: scale(1.3) rotate(10deg);
+                filter: drop-shadow(0 0 8px #B4975B);
+            }
+
+        .icon-title {
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+            .icon-title span {
+                display: block;
+                font-size: 20px;
+                margin-top: 3px;
+                color: #B4975B;
+            }
+        /* Tooltip */
+        .icon-box .tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #B4975B;
+            color: #fff;
+            padding: 6px 10px;
+            font-size: 22px;
+            border-radius: 6px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s, transform .3s;
+        }
+
+        .icon-box:hover .tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: clamp(10px, 2vw, 30px);
+            font-weight: bold;
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+
+
+                .footer a:hover {
+                    color: #B4975B;
+                    text-shadow: 0 0 5px #B4975B;
+                }
+        /* ===== MEDIA ===== */
+        @media(max-width:768px) {
+
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .icons-grid {
+                grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+            }
+        }
+        /* ===== PARTICLE CANVAS ===== */
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+
+        /* ===== تصميم مستطيل البيانات في الهيدر  ===== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: #413100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        /* المستطيل */
+        .employee-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(5px, 1vw, 12px);
+            background: linear-gradient(135deg,#D6C394,#B4975B);
+            padding: clamp(4px, 0.8vw, 8px) clamp(8px, 1.5vw, 14px);
+            border-radius: 10px;
+            color: #413100;
+            font-weight: 600;
+            font-size: clamp(10px, 1vw, 14px);
+            flex-wrap: wrap;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .separator {
+            opacity: 0.6;
+        }
+
+
+        /* ===== RESPONSIVE ===== */
+
+        html {
+            font-size: 16px;
+        }
+
+
+        /* شاشات صغيرة */
+        @media screen and (max-width: 1024px) {
+
+            .header {
+                padding: 8px 12px;
+            }
+
+            .container {
+                padding-top: 90px !important;
+            }
+
+            .header-links {
+                gap: 10px;
+            }
+
+            .employee-box {
+                font-size: 11px;
+                padding: 5px 8px;
+            }
+
+            .footer {
+                gap: 15px;
+            }
+        }
+
+        /* Zebra / Tablets */
+        @media screen and (max-width: 768px) {
+
+            .header {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .header-links {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .employee-box {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+
+
+
+
+
+
+
+
+        /* قيود استخدام موقع نجاحي و اهلا  */
+
+        /* ===== service with small guide button ===== */
+        .service-guide-wrap {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .service-guide-top {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .service-guide-wrap .icon-box {
+            width: 100%;
+        }
+
+        .guide-info-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid #B4975B;
+            background: #fff;
+            color: #5A3E1B;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 0;
+        }
+
+            .guide-info-btn:hover {
+                background: #B4975B;
+                color: #fff;
+                transform: translateY(-1px);
+            }
+    </style>
+
+
+    <style>
+
+             /* =========================================================
+        SIMPLE MODAL (FINAL VERSION)
+        ========================================================= */
+
+             .simple-overlay {
+                 position: fixed;
+                 inset: 0;
+                 background: rgba(0,0,0,0.45);
+                 backdrop-filter: blur(6px);
+                 display: flex;
+                 justify-content: center;
+                 align-items: center;
+                 opacity: 0;
+                 visibility: hidden;
+                 transition: .3s ease;
+                 z-index: 9999;
+                 padding: 10px;
+             }
+
+                 .simple-overlay.active {
+                     opacity: 1;
+                     visibility: visible;
+                 }
+
+             .simple-modal {
+                 background: #fff;
+                 width: min(92vw,950px);
+                 max-width: 95%;
+                 max-height: 92vh;
+                 overflow-y: auto;
+                 padding: clamp(20px,2vw,35px);
+                 border-radius: 20px;
+                 border: 3px solid #5A3E1B;
+                 box-shadow: 0 20px 50px rgba(0,0,0,.25);
+                 position: relative;
+                 transform: translateY(20px);
+                 transition: .3s ease;
+             }
+
+             .simple-overlay.active .simple-modal {
+                 transform: translateY(0);
+             }
+
+             .simple-title,
+             .simple-modal .title,
+             .simple-modal .popup-title {
+                 text-align: center;
+                 font-size: clamp(20px,2vw,28px);
+                 font-weight: 600;
+                 color: #413100;
+                 margin-bottom: 18px;
+                 text-transform: uppercase;
+                 border-left: 4px solid #B4975B;
+                 padding-left: 12px;
+             }
+
+             .simple-content {
+                 font-size: clamp(14px,1vw,18px);
+                 line-height: 1.8;
+                 color: #413100;
+             }
+
+             .simple-close {
+                 position: absolute;
+                 top: 15px;
+                 right: 18px;
+                 font-size: 22px;
+                 cursor: pointer;
+                 color: #413100;
+                 transition: .25s;
+             }
+
+                 .simple-close:hover {
+                     color: #B4975B;
+                     transform: rotate(90deg);
+                 }
+
+             /* ================= FORM ================= */
+
+             .popup-form {
+                 border: 3px solid #5A3E1B;
+                 border-radius: 18px;
+                 padding: clamp(15px,2vw,30px);
+                 display: flex;
+                 flex-direction: column;
+                 gap: 18px;
+             }
+
+             .form-row {
+                 display: flex;
+                 gap: 18px;
+                 flex-wrap: wrap;
+             }
+
+             .form-group {
+                 flex: 1;
+                 min-width: min(100%,250px);
+             }
+
+                 .form-group label {
+                     display: block;
+                     margin-bottom: 6px;
+                     font-size: clamp(12px,1vw,18px);
+                     font-weight: 700;
+                     color: #413100;
+                 }
+
+                 .form-group input,
+                 .form-group select,
+                 .form-group textarea {
+                     width: 100%;
+                     padding: clamp(10px,1vw,14px);
+                     font-size: clamp(12px,1vw,16px);
+                     border: 2px solid #B4975B;
+                     border-radius: 10px;
+                     outline: none;
+                 }
+
+                 .form-group textarea {
+                     resize: none;
+                 }
+
+             /* ================= BUTTONS ================= */
+
+             .buttons {
+                 margin-top: 15px;
+                 display: flex;
+                 justify-content: flex-end;
+                 gap: 12px;
+                 flex-wrap: wrap;
+             }
+
+                 .buttons button {
+                     padding: clamp(10px,1vw,14px) clamp(18px,2vw,30px);
+                     font-size: clamp(12px,1vw,16px);
+                     border: none;
+                     border-radius: 10px;
+                     cursor: pointer;
+                 }
+
+             /* ================= MOBILE ================= */
+
+             @media (max-width:768px) {
+
+                 .simple-modal {
+                     width: 96vw;
+                     max-height: 95vh;
+                     padding: 15px;
+                 }
+
+                 .form-row {
+                     flex-direction: column;
+                 }
+
+                 .buttons {
+                     justify-content: center;
+                 }
+
+                 .simple-title,
+                 .simple-modal .title,
+                 .simple-modal .popup-title {
+                     font-size: 22px;
+                 }
+
+                 .simple-content {
+                     font-size: 15px;
+                 }
+             }
+
+             .footer a {
+                 color: #413100;
+                 text-decoration: none;
+                 transition: .3s;
+                 font-size: 18px;
+                 line-height: 1.4;
+                 font-weight: 500;
+             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* ================= طلباتي بوباب ================= */
+
+
+        .request-card {
+            border: 2px solid #B4975B;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 18px;
+            background: #FCFAF5;
+        }
+
+            .request-card h3 {
+                color: #413100;
+                margin-bottom: 10px;
+            }
+
+        .request-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+
+        .request-actions {
+            margin-top: 15px;
+            text-align: right;
+        }
+
+            .request-actions button {
+                background: #B4975B;
+                color: white;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+
+                .request-actions button:hover {
+                    background: #8f7339;
+                }
+
+
+
+        /* ================= طلباتي لينك ================= */
+
+        .top-links {
+            display: flex;
+            justify-content: flex-start;
+            direction: ltr;
+            margin: 12px 0 18px;
+        }
+
+        .my-requests-link {
+            color: #5A3E1B;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: .25s;
+            border-bottom: 2px solid transparent;
+        }
+
+            .my-requests-link:hover {
+                color: #B4975B;
+                border-bottom: 2px solid #B4975B;
+            }
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+
+    <canvas id="particles"></canvas>
+
+    <div class="header">
+        <div class="logo"><img src="images/MAJEDALFUTTAIMNEW-removebg-preview.png" alt="Logo"></div>
+        <div class="header-links">
+
+            <span>MARHABA </span>
+
+            <div class="employee-box">
+                <span id="empName"></span>
+                <span class="separator">|</span>
+                <span id="empNo"></span>
+                <span class="separator">|</span>
+                <span id="empDept"></span>
+            </div>
+
+
+
+            <button onclick="logout()">
+                Logout <br> تسجيل الخروج
+            </button>
+
+
+
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="hero">
+            <div class="quick-actions"></div>
+
+
+            <div class="top-links">
+                <a href="javascript:void(0);" onclick="openMyRequests()" class="my-requests-link">
+                    My Requests | طلباتي
+                </a>
+            </div>
+
+
+            <div class="icons-grid">
+
+
+                <a href="javascript:void(0);" onclick="openExitPopup()" class="icon-box">
+                    <img src="images/icons8-to-go-50.png">
+                    <div class="icon-title">Exit Re-Entry<span>طلب خروج وعودة</span></div>
+                </a>
+                 
+
+                <a href="#" onclick="openUniformPopup()" class="icon-box">
+                    <img src="images/icons8-formal-outfit-50.png">
+                    <div class="icon-title">Uniform Request<span>الزي الرسمي الموحد</span></div>
+                    <div class="tooltip">طلب الزي الرسمي </div>
+                </a>
+
+
+                <a href="javascript:void(0);" onclick="openAccessCardPopup()" class="icon-box">
+                    <img src="images/icons8-magnetic-card-50.png">
+                    <div class="icon-title">Access Card Request<span>اصدار بطاقة الدخول</span></div>
+                </a>
+
+
+                <a href="javascript:void(0);" onclick="openSalaryPopup()" class="icon-box">
+                    <img src="images/icons8-paycheque-50.png">
+                    <div class="icon-title">Salary Declaration<span>تعريف بالراتب</span></div>
+                </a>
+
+
+
+                <a href="#" class="icon-box" onclick="openBankLoanPopup()">
+                    <img src="images/icons8-bank-account-48.png">
+                    <div class="icon-title">Bank Loan Request<span>طلب قرض من البنك</span></div>
+                </a>
+
+
+                <a href="javascript:void(0);" onclick="openFamilyPopup()" class="icon-box">
+                    <img src="images/icons8-family-50.png">
+                    <div class="icon-title">Family Visit Visa<span>تأشيرة زيارة عائلية</span></div>
+                </a>
+
+                <!-- ===== Ahlan Portal ===== -->
+                <div class="service-guide-wrap">
+                    <div class="service-guide-top">
+
+
+                        <a href="https://mdp.maf.ae/#/home" class="icon-box">
+                            <img src="images/icons8-spa-care-48.png">
+                            <div class="icon-title">
+                                Ahlan Portal<span>بوابة أهلا</span>
+                                <button class="guide-info-btn"
+                                        type="button"
+                                        onclick="event.preventDefault(); event.stopPropagation(); window.open('PDF/SF%20Guidline.pdf','_blank');">
+                                    i
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- ===== My Success ===== -->
+                <div class="service-guide-wrap">
+                    <div class="service-guide-top">
+
+                        <a href="https://performancemanager.successfactors.eu/" class="icon-box">
+                            <img src="images/icons8-i-50.png">
+                            <div class="icon-title">
+                                My Success<span>موقع نجاحي</span>
+                                <button class="guide-info-btn"
+                                        type="button"
+                                        onclick="event.preventDefault(); event.stopPropagation(); window.open('PDF/SF%20Guidline.pdf','_blank');">
+                                    i
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+                <a href="http://rtlhrmsapp/Carrefour/LDS_HR/login.aspx" class="icon-box">
+                    <img src="images/icons8-feedback-50.png">
+                    <div class="icon-title">
+                        HCMS Portal  <span>HCMS بوابة</span>
+                    </div>
+
+                </a>
+
+
+
+                <a href="javascript:void(0);" onclick="openExperiencePopup()" class="icon-box">
+                    <img src="images/icons8-certification-50.png">
+                    <div class="icon-title">Experience Certificate<span>طلب شهادة خبرة</span></div>
+                </a>
+
+                <a href="javascript:void(0);" onclick="openSimPopup()" class="icon-box">
+                    <img src="images/icons8-micro-sim-card-50.png">
+                    <div class="icon-title">Issue Mobile SIM<span>اصدار شرائح الجوال</span></div>
+                </a>
+
+
+                <a href="https://app.adjust.com/1z35s2uu?campaign=C4-Generic&deep_link_id=390182" class="icon-box">
+                    <img src="images/icons8-conversion-rate-50.png">
+                    <div class="icon-title"> SHARE<span>شير</span></div>
+                </a>
+
+                <a href="javascript:void(0);" onclick="openEmployeeFeedbackPopup()" class="icon-box">
+                    <img src="images/icons8-customer-survey-50.png">
+                    <div class="icon-title">Employee Feedback<span>ملاحظات الموظفين</span></div>
+                </a>
+
+
+                <a href="javascript:void(0);" onclick="openLeavePopup()" class="icon-box">
+                    <img src="images/icons8-purchase-order-50.png">
+                    <div class="icon-title">Leave Request<span>طلب إجازة</span></div>
+                </a>
+
+
+
+                <a href="javascript:void(0);" onclick="openPayslipPopup()" class="icon-box">
+                    <img src="images/icons8-salary-50.png">
+                    <div class="icon-title">Payslip<span>كشف الراتب</span></div>
+                </a>
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="footer">
+            <a href="#" onclick="openSimpleModal('copyrightModal')">Portal Guide <br>  دليل البوابة</a>
+            <a href="#" onclick="openSimpleModal('privacyModal')">Privacy & Data Protection <br>الخصوصية وحماية البيانات</a>
+            <a href="mailto:support@chportal.com">Contact Us <br>تواصل معنا</a>
+        </div>
+
+    </div>
+
+    <style>
+        select {
+            position: relative;
+            z-index: 9999;
+
+            select, option {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+
+
+
+
+    <script>
+
+
+        //iqama form DataBase
+
+        function onIqamaChange() {
+
+            const select = document.getElementById("iqamaSelect");
+
+            if (!select || select.selectedIndex === -1) return;
+
+            const text = select.options[select.selectedIndex].text;
+
+            const relationship = text.split(" - ")[1];
+
+            const relationInput = document.getElementById("relationship");
+
+            if (relationInput) {
+                relationInput.value = relationship;
+            } else {
+                console.error("relationship input not found in HTML");
+            }
+        }
+
+        //ترتيب الاقامات في الخروج و العوده
+
+        document.addEventListener("click", function (e) {
+            const box = document.getElementById("iqamaSelectBox");
+            const dropdown = document.getElementById("iqamaDropdown");
+
+            if (box.contains(e.target)) {
+                dropdown.style.display =
+                    dropdown.style.display === "block" ? "none" : "block";
+            } else if (!dropdown.contains(e.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+
+
+
+
+
+
+
+
+
+        function closeExitPopup() {
+            document.getElementById('exitPopup').classList.remove('active');
+        }
+
+
+        async function loadIqamas(empNo) {
+            try {
+
+                const API_BASE = "http://10.240.112.61:5074";
+                const url = `${API_BASE}/api/employee/iqamas/${empNo}`;
+
+                const res = await fetch(url);
+
+                if (!res.ok) return;
+
+                const data = await res.json();
+
+                const container = document.getElementById("iqamaDropdown");
+                container.innerHTML = "";
+
+                data.forEach(item => {
+                    container.innerHTML += `
+                                    <label style="display:block; margin-bottom:8px;">
+                                        <input type="checkbox"
+                                               name="iqamas"
+                                               value="${item.iqamaNo}">
+                                        ${item.iqamaNo} - ${item.relationship}
+                                    </label>
+                                `;
+                });
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+
+
+
+        //get the data from DataBase
+
+        function fillEmployeeData() {
+
+            const name = sessionStorage.getItem("name");
+            const empNo = sessionStorage.getItem("empNo");
+            const department = sessionStorage.getItem("department");
+
+            document.querySelectorAll(".emp-name").forEach(e => e.value = name);
+            document.querySelectorAll(".emp-id").forEach(e => e.value = empNo);
+            document.querySelectorAll(".emp-dept").forEach(e => e.value = department);
+        }
+
+
+
+        async function submitLeaveForm() {
+
+            const data = {
+                empNo: sessionStorage.getItem("empNo"),
+                name: sessionStorage.getItem("name"),
+                department: sessionStorage.getItem("department"),
+                fromDate: document.querySelector("#leavePopup input[type='date']:nth-of-type(1)").value,
+                toDate: document.querySelector("#leavePopup input[type='date']:nth-of-type(2)").value
+            };
+
+            await sendRequest(data, "leave");
+        }
+
+
+        async function submitEmployeeFeedbackForm() {
+
+            const data = {
+                empNo: sessionStorage.getItem("empNo"),
+                name: sessionStorage.getItem("name"),
+                department: sessionStorage.getItem("department"),
+                feedback: document.querySelector("#employeeFeedbackPopup textarea").value
+            };
+
+            await sendRequest(data, "feedback");
+        }
+
+
+
+
+
+
+        async function submitSimForm() {
+
+            const simType = document.getElementById("simType").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            const preferredNetwork = document.getElementById("preferredNetwork").value;
+            const notes = document.getElementById("simNotes").value;
+
+            // ✅ Validation
+            if (!simType) {
+                alert("Please select SIM type");
+                return;
+            }
+
+            if (!mobileNumber) {
+                alert("Please enter mobile number");
+                return;
+            }
+
+            if (!preferredNetwork) {
+                alert("Please select preferred network");
+                return;
+            }
+
+            const remarksText = `
+SIM Request
+
+SIM Type: ${simType}
+Mobile Number: ${mobileNumber}
+Preferred Network: ${preferredNetwork}
+
+Additional Notes:
+${notes || "N/A"}
+`;
+
+            const data = {
+                requestTypeId: 18,
+                empNo: sessionStorage.getItem("empNo"),
+                reason: remarksText
+            };
+
+            console.log("REMARKS =", remarksText);
+
+            try {
+
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/issue-sim",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const text = await res.text();
+
+                console.log("SERVER RESPONSE:", text);
+
+                if (res.ok) {
+
+                    alert("SIM Request Sent Successfully ✅");
+                    closeSimPopup();
+
+                } else {
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+
+                console.error(err);
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+        async function submitLoanForm() {
+            const empName = document.querySelector("#bankLoanPopup .emp-name").value;
+            const empId = document.querySelector("#bankLoanPopup .emp-id").value;
+
+            const bankName = document.getElementById("bankName").value;
+            const loanAmount = document.getElementById("loanAmount").value;
+            const loanDuration = document.getElementById("loanDuration").value;
+            const loanPurpose = document.getElementById("loanPurpose").value;
+            const loanNotes = document.getElementById("loanNotes").value;
+
+            if (!bankName) {
+                alert("Please enter bank name");
+                return;
+            }
+
+            if (!loanAmount) {
+                alert("Please enter loan amount");
+                return;
+            }
+
+            if (!loanDuration) {
+                alert("Please enter loan duration");
+                return;
+            }
+
+            if (!loanPurpose) {
+                alert("Please select loan purpose");
+                return;
+            }
+
+            const remarksText = `
+BANK LOAN REQUEST
+
+Employee Name: ${empName}
+Employee ID: ${empId}
+
+Bank Name: ${bankName}
+Loan Amount: ${loanAmount}
+Loan Duration: ${loanDuration}
+Loan Purpose: ${loanPurpose}
+
+Additional Notes:
+${loanNotes || "N/A"}
+`;
+
+            const data = {
+                empNo: sessionStorage.getItem("empNo"),
+                requestTypeId: 20,
+                reason: remarksText
+            };
+
+            try {
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/loan-request",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const text = await res.text();
+                console.log("SERVER:", text);
+
+                if (res.ok) {
+                    alert("Bank Loan Request Sent Successfully ✅");
+                    closeBankLoanPopup();
+                } else {
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+
+
+
+        async function submitExperienceForm() {
+
+            const language = document.getElementById("certificateLanguage").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const notes = document.getElementById("experienceNotes").value;
+
+            // ✅ validation (الحقول الإلزامية فقط)
+            if (!language) {
+                alert("Please select certificate language");
+                return;
+            }
+
+            if (!startDate) {
+                alert("Please select employment start date");
+                return;
+            }
+
+            if (!endDate) {
+                alert("Please select employment end date");
+                return;
+            }
+
+            const remarksText = `
+Experience Certificate Request
+
+Certificate Language: ${language}
+Employment Start Date: ${startDate}
+Employment End Date: ${endDate}
+
+Additional Notes:
+${notes || "N/A"}
+`;
+
+            const data = {
+                requestTypeId: 5,
+                empNo: sessionStorage.getItem("empNo"),
+                reason: remarksText
+            };
+
+            try {
+
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/experience-certificate",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const text = await res.text();
+
+                console.log("SERVER RESPONSE:", text);
+
+                if (res.ok) {
+
+                    alert("Experience Certificate Request Sent Successfully ✅");
+                    closeExperiencePopup();
+
+                } else {
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+
+                console.error(err);
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+
+
+        async function submitFamilyForm() {
+
+            const visitorRows = document.querySelectorAll(".visitor-card");
+
+            const arrivalDate = document.getElementById("arrivalDate").value;
+            const duration = document.getElementById("duration").value;
+            const notes = document.getElementById("notes").value;
+
+            // ✅ تحقق من الحقول الأساسية
+            if (!arrivalDate) {
+                alert("Please select arrival date");
+                return;
+            }
+
+            if (!duration) {
+                alert("Please enter duration");
+                return;
+            }
+
+            if (visitorRows.length === 0) {
+                alert("Please add at least one visitor");
+                return;
+            }
+
+            let reasonText = `
+FAMILY VISIT VISA REQUEST
+
+Employee No : ${sessionStorage.getItem("empNo")}
+Arrival Date : ${arrivalDate}
+Duration : ${duration} Days
+
+VISITORS
+`;
+
+            // ✅ تحقق من كل زائر
+            let hasError = false;
+
+            visitorRows.forEach((row, index) => {
+
+                const name = row.querySelector(".visitor-name").value;
+                const relationship = row.querySelector(".visitor-relationship").value;
+                const passport = row.querySelector(".visitor-passport").value;
+                const nationality = row.querySelector(".visitor-nationality").value;
+
+                if (!name || !relationship || !passport || !nationality) {
+                    hasError = true;
+                }
+
+                reasonText += `
+Visitor #${index + 1}
+----------------------------------------
+Name           : ${name}
+Relationship   : ${relationship}
+Passport No.   : ${passport}
+Nationality    : ${nationality}
+`;
+            });
+
+            if (hasError) {
+                alert("Please fill all visitor details");
+                return;
+            }
+
+            reasonText += `
+
+NOTES
+
+${notes || "N/A"}
+
+`;
+
+            const data = {
+                requestTypeId: 15,
+                empNo: sessionStorage.getItem("empNo"),
+                reason: reasonText
+            };
+
+            try {
+
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/family-visit",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const result = await res.text();
+
+                if (res.ok) {
+                    alert("Request Submitted Successfully ✅");
+                    closeFamilyPopup();
+                } else {
+                    alert(result);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Error Sending Request");
+            }
+        }
+
+
+
+
+
+        async function submitSalaryForm() {
+
+            const purpose = document.getElementById("salaryPurpose").value;
+            const notes = document.getElementById("salaryNotes").value;
+
+            const remarksText = `
+Salary Declaration Request
+
+Purpose: ${purpose}
+
+Additional Notes:
+${notes}
+`;
+
+            const data = {
+                requestTypeId: 3,
+                empNo: sessionStorage.getItem("empNo"),
+                reason: remarksText
+            };
+
+            console.log("REMARKS =", remarksText);
+
+            try {
+
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/salary-declaration",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                const text = await res.text();
+
+                console.log("SERVER RESPONSE:", text);
+
+                if (res.ok) {
+
+                    closeSalaryPopup();
+
+                    alert("Salary Declaration Request Sent Successfully ✅");
+
+                } else {
+
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+
+                console.error(err);
+
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+
+
+
+
+        async function submitExitForm() {
+
+            const iqamas = Array.from(
+                document.querySelectorAll('input[name="iqamas"]:checked')
+            ).map(x => x.value);
+
+            const exitType = document.getElementById("exitType").value;
+            const exitDate = document.getElementById("exitDate").value;
+            const returnDate = document.getElementById("returnDate").value;
+            const reason = document.getElementById("reason").value;
+
+            // ✅ تحقق من الحقول الإلزامية (كل شيء ما عدا السبب)
+            if (iqamas.length === 0) {
+                alert("Please select at least one Iqama number");
+                return;
+            }
+
+            if (!exitType) {
+                alert("Please select exit type");
+                return;
+            }
+
+            if (!exitDate) {
+                alert("Please select exit date");
+                return;
+            }
+
+            if (!returnDate) {
+                alert("Please select return date");
+                return;
+            }
+
+            const remarksText = `
+Exit & Re-Entry Request
+Iqama Numbers: ${iqamas.join(", ")}
+Exit Type: ${exitType}
+Exit Date: ${exitDate}
+Return Date: ${returnDate}
+Reason: ${reason || "N/A"}
+`;
+
+            const data = {
+                empNo: sessionStorage.getItem("empNo"),
+                requestTypeId: 12,
+                reason: remarksText
+            };
+
+            console.log("FINAL DATA:", data);
+
+            try {
+                const res = await fetch(
+                    "http://10.240.112.61:5090/api/EmployeeRequests/exit-reentry",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                const text = await res.text();
+                console.log("SERVER:", text);
+
+                if (res.ok) {
+                    alert("Request Sent Successfully ✅");
+                    closeExitPopup();
+                } else {
+                    alert(text);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+
+
+
+
+
+        async function submitUniformForm() {
+            try {
+                const size = document.getElementById("uniformSize").value.trim();
+                const shoeSize = document.getElementById("shoeSize").value.trim();
+                const qty = document.getElementById("uniformQty").value.trim();
+                const reason = document.getElementById("uniformReason").value.trim();
+
+                const selectedUniform = document.querySelector(".uniform-card.selected");
+
+                // 1) مقاس اللبس إجباري
+                if (!size) {
+                    alert("Please select uniform size / الرجاء اختيار مقاس اللبس");
+                    return;
+                }
+
+                // 2) مقاس الحذاء إجباري
+                if (!shoeSize) {
+                    alert("Please select shoe size / الرجاء اختيار مقاس الحذاء");
+                    return;
+                }
+
+                // 3) الكمية إجبارية
+                if (!qty || Number(qty) <= 0) {
+                    alert("Please enter quantity / الرجاء إدخال الكمية");
+                    return;
+                }
+
+                // 4) نوع الزي إجباري
+                if (!selectedUniform) {
+                    alert("Please select one uniform type / الرجاء اختيار نوع زي واحد");
+                    return;
+                }
+
+
+
+                const selectedUniformValue = selectedUniform.dataset.value;
+
+                const remarksText = `
+Uniform Request
+
+Size: ${size}
+Shoe Size: ${shoeSize}
+Quantity: ${qty}
+
+Uniform Type:
+${selectedUniformValue}
+
+Reason:
+${reason}
+`.trim();
+
+                const data = {
+                    empNo: sessionStorage.getItem("empNo"),
+                    requestTypeId: 9,
+                    reason: remarksText
+                };
+
+                console.log("FINAL DATA:", data);
+
+                const res = await fetch("http://10.240.112.61:5090/api/EmployeeRequests/uniform-request", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const text = await res.text();
+                console.log("SERVER:", text);
+
+                if (res.ok) {
+                    alert("Uniform Request Sent Successfully ✅");
+                    closeUniformPopup();
+                } else {
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Something went wrong.");
+            }
+        }
+
+
+
+
+
+
+
+        async function submitAccessCardForm() {
+
+            const cardType = document.querySelector("#accessCardPopup select").value;
+            const reason = document.querySelector("#accessCardPopup textarea").value;
+
+            // ✅ تحقق من الحقول الإلزامية (كلها ما عدا السبب)
+            if (!cardType) {
+                alert("Please select card type");
+                return;
+            }
+
+            const remarksText = `
+Access Card Request
+Card Type: ${cardType}
+Reason: ${reason || "N/A"}
+`;
+
+            const data = {
+                empNo: sessionStorage.getItem("empNo"),
+                requestTypeId: 17,
+                reason: remarksText
+            };
+
+            try {
+
+                const res = await fetch("http://10.240.112.61:5090/api/EmployeeRequests/access-card", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const text = await res.text();
+                console.log("SERVER RESPONSE:", text);
+
+                if (res.ok) {
+                    closeAccessCardPopup();
+                    alert("Request Sent Successfully ✅");
+                } else {
+                    alert("FAILED: " + text);
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert("Server Error ❌");
+            }
+        }
+
+
+
+
+
+        function logout() {
+            // حذف أي بيانات جلسة (إذا تستخدمها)
+            sessionStorage.clear();
+            localStorage.clear();
+
+            // يمنع الرجوع للصفحة السابقة
+            window.location.replace("index.html");
+        }
+
+
+
+
+
+
+        // ===== PARTICLE BACKGROUND =====
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+
+        let particles = [];
+        const particleCount = 400;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 1.2,
+                dy: (Math.random() - 0.5) * 1.2
+            });
+
+
+
+        }
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+                ctx.fillStyle = "#B4975B88";
+                ctx.fill();
+
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if (p.x < 0 || p.x > w) p.dx *= -1;
+                if (p.y < 0 || p.y > h) p.dy *= -1;
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+
+
+
+
+
+
+
+
+
+    <script>
+        function openPayslipPopup() {
+            fillEmployeeData();
+            document.getElementById('payslipPopup').classList.add('active');
+        }
+
+        function closePayslipPopup() {
+            document.getElementById('payslipPopup').classList.remove('active');
+        }
+    </script>
+
+
+
+
+
+    <script>
+        function openAccessCardPopup() {
+            fillEmployeeData();
+            document.getElementById('accessCardPopup').classList.add('active');
+        }
+
+        function closeAccessCardPopup() {
+            document.getElementById('accessCardPopup').classList.remove('active');
+        }
+
+
+
+    </script>
+
+
+
+    <script>
+        function openEmployeeFeedbackPopup() {
+            fillEmployeeData();
+            document.getElementById('employeeFeedbackPopup').classList.add('active');
+        }
+
+        function closeEmployeeFeedbackPopup() {
+            document.getElementById('employeeFeedbackPopup').classList.remove('active');
+        }
+
+
+
+
+        // Creative Buttons Rating
+        document.addEventListener('DOMContentLoaded', () => {
+            const ratingBtns = document.querySelectorAll('.rating-btn');
+            ratingBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    ratingBtns.forEach(b => b.style.background = '');
+                    this.style.background = '#B4975B';
+                });
+            });
+        });
+    </script>
+
+
+
+    <script>
+
+        function openExitPopup() {
+            fillEmployeeData();
+
+            const empNo = sessionStorage.getItem("empNo");
+
+            if (empNo) {
+                loadIqamas(empNo);
+            }
+
+            document.getElementById('exitPopup').classList.add('active');
+        }
+
+
+        function closeExitPopup() {
+            document.getElementById('exitPopup').classList.remove('active');
+        }
+
+
+    </script>
+
+
+
+    <script>
+        function openUniformPopup() {
+            fillEmployeeData();
+            document.getElementById('uniformPopup').classList.add('active');
+        }
+
+        function closeUniformPopup() {
+            document.getElementById('uniformPopup').classList.remove('active');
+        }
+
+
+
+
+        function toggleUniform(card) {
+            const allCards = document.querySelectorAll(".uniform-card");
+
+            // إزالة التحديد من جميع الكروت
+            allCards.forEach(c => {
+                c.classList.remove("selected");
+                c.style.border = "2px solid #ddd";
+                c.style.background = "#fff";
+            });
+
+            // تحديد الكرت المضغوط فقط
+            card.classList.add("selected");
+            card.style.border = "3px solid #B4975B";
+            card.style.background = "#FCFAF5";
+        }
+
+    </script>
+
+
+
+    <script>
+        function openSalaryPopup() {
+            fillEmployeeData();
+            document.getElementById('salaryPopup').classList.add('active');
+        }
+
+        function closeSalaryPopup() {
+            document.getElementById('salaryPopup').classList.remove('active');
+        }
+
+
+    </script>
+
+
+    <script>
+        function openExperiencePopup() {
+            fillEmployeeData();
+            document.getElementById('experiencePopup').classList.add('active');
+        }
+
+        function closeExperiencePopup() {
+            document.getElementById('experiencePopup').classList.remove('active');
+        }
+
+
+    </script>
+
+    <script>
+        function openBankLoanPopup() {
+            fillEmployeeData();
+            document.getElementById('bankLoanPopup').classList.add('active');
+        }
+
+        function closeBankLoanPopup() {
+            document.getElementById('bankLoanPopup').classList.remove('active');
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+    <script>
+        function openFamilyPopup() {
+
+            fillEmployeeData();
+
+            document.getElementById('familyPopup').classList.add('active');
+
+            const container = document.getElementById("visitorsContainer");
+
+            // إذا ما فيه أي زائر أضف أول زائر تلقائياً
+            if (container.children.length === 0) {
+                addVisitorRow();
+            }
+        }
+
+        function closeFamilyPopup() {
+            document.getElementById('familyPopup').classList.remove('active');
+        }
+
+
+        let visitorIndex = 0;
+
+        function addVisitorRow() {
+
+            const container = document.getElementById("visitorsContainer");
+
+            visitorIndex++;
+
+            const row = document.createElement("div");
+
+            row.style.cssText = `
+                            border:2px solid #B4975B;
+                            border-radius:18px;
+                            padding:20px;
+                            background:#FCFAF5;
+                        `;
+
+            row.innerHTML = `
+
+                        <div style="
+                            display:flex;
+                            justify-content:space-between;
+                            align-items:center;
+                            margin-bottom:15px;
+                            border-bottom:1px solid #E5D6B0;
+                            padding-bottom:10px;
+                        ">
+
+                            <strong style="color:#5A3E1B;">
+                                Visitor ${visitorIndex}
+                            </strong>
+
+                            <button type="button"
+                                    onclick="this.closest('.visitor-card').remove()"
+                                    style="
+                                        background:#dc3545;
+                                        color:white;
+                                        border:none;
+                                        border-radius:8px;
+                                        padding:6px 12px;
+                                        cursor:pointer;">
+                                Remove
+                            </button>
+
+                        </div>
+
+                        <div style="
+                            display:grid;
+                            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                            gap:15px;
+                        ">
+
+                            <input type="text"
+                                   class="visitor-name"
+                                   placeholder="Visitor Name">
+
+                            <select class="visitor-relationship">
+                                <option>Father</option>
+                                <option>Mother</option>
+                                <option>Wife</option>
+                                <option>Husband</option>
+                                <option>Son</option>
+                                <option>Daughter</option>
+                                <option>Other</option>
+                            </select>
+
+                            <input type="text"
+                                   class="visitor-passport"
+                                   placeholder="Passport Number">
+
+                            <input type="text"
+                                   class="visitor-nationality"
+                                   placeholder="Nationality">
+
+                        </div>
+                        `;
+
+            row.classList.add("visitor-card");
+
+            container.appendChild(row);
+        }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+    <script>
+        function openSimPopup() {
+            fillEmployeeData();
+            document.getElementById('simPopup').classList.add('active');
+        }
+
+        function closeSimPopup() {
+            document.getElementById('simPopup').classList.remove('active');
+        }
+
+    </script>
+
+
+
+    <script>
+        //   privacyModal  copyrightModal فتح المودال
+        function openSimpleModal(id) {
+            fillEmployeeData();
+            document.getElementById(id).classList.add("active");
+        }
+
+        // غلق المودال
+        function closeSimpleModal(id) {
+            document.getElementById(id).classList.remove("active");
+        }
+
+        // غلق المودال عند الضغط خارج الصندوق
+        document.querySelectorAll(".simple-overlay").forEach(overlay => {
+            overlay.addEventListener("click", function (e) {
+                if (e.target === this) {
+                    this.classList.remove("active");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function openComingSoonPopup() {
+            fillEmployeeData();
+            document.getElementById("comingSoonPopup").classList.add("active");
+        }
+
+        function closeComingSoonPopup() {
+            document.getElementById("comingSoonPopup").classList.remove("active");
+        }
+    </script>
+
+
+    <script>
+        function openLeavePopup() {
+            fillEmployeeData();
+            document.getElementById("leavePopup").classList.add("active");
+        }
+
+        function closeLeavePopup() {
+            document.getElementById("leavePopup").classList.remove("active");
+        }
+
+
+    </script>
+
+
+
+
+    <!-- ===== COPYRIGHT MODAL ===== -->
+    <div class="simple-overlay" id="copyrightModal">
+        <div class="simple-modal">
+            <div class="simple-close" onclick="closeSimpleModal('copyrightModal')">✕</div>
+
+            <div class="simple-content">
+
+
+
+                <div class="simple-title">Portal Guide | دليل البوابة</div>
+
+
+
+                <b>General Instructions</b><br><br>
+
+                • Use your company account to access the portal.<br>
+                • Complete all required fields before submitting any request.<br>
+                • Review your information before clicking <b>Submit</b>.<br>
+                • Upload supporting documents when required.<br>
+                • Keep your personal information up to date.<br>
+                • Contact IT Support if you encounter any technical issues.
+
+                <br><br>
+
+                <b>MySuccess</b><br><br>
+
+                • Log in using your company credentials.<br>
+                • Update your personal and bank information when needed.<br>
+                • Download your payslip and submit leave requests through <b>Time Off</b>.
+
+                <br><br>
+
+                <b>Uniform Request</b><br><br>
+
+                • Wear the approved company uniform during working hours.<br>
+                • Select the correct uniform and shoe size before submitting your request.<br>
+                • Uniform requests can be submitted through this portal.
+
+                <br><br>
+
+                <b>Privacy</b><br><br>
+
+                • Your information is protected and used only for authorized business purposes.
+
+                <br><br>
+
+
+                <b>Technical Support</b><br><br>
+
+                • If you encounter any technical issues or need assistance, you can contact the Technical Support team through <b>Microsoft Teams</b>.<br>
+                • A support representative will respond to your inquiries and provide the necessary assistance.<br>
+                • The Technical Support team is available to answer your questions and help resolve portal-related issues.
+
+                <br><br>
+
+                <hr>
+
+                <br>
+
+                
+                <br>
+
+                <div dir="rtl" align="right">
+
+                    <b>إرشادات عامة</b><br><br>
+
+                    • استخدم حساب الشركة للدخول إلى البوابة.<br>
+                    • أكمل جميع الحقول المطلوبة قبل إرسال أي طلب.<br>
+                    • راجع بياناتك قبل الضغط على <b>إرسال</b>.<br>
+                    • أرفق المستندات المطلوبة عند الحاجة.<br>
+                    • حافظ على تحديث بياناتك الشخصية.<br>
+                    • تواصل مع الدعم الفني عند مواجهة أي مشكلة تقنية.
+
+                    <br><br>
+
+                    <b>MySuccess</b><br><br>
+
+                    • سجّل الدخول باستخدام بيانات حساب الشركة.<br>
+                    • حدّث بياناتك الشخصية والبنكية عند الحاجة.<br>
+                    • يمكنك تحميل مسير الراتب وتقديم طلبات الإجازة من خلال <b>Time Off</b>.
+
+                    <br><br>
+
+                    <b>طلب الزي الرسمي</b><br><br>
+
+                    • الالتزام بارتداء الزي الرسمي المعتمد أثناء ساعات العمل.<br>
+                    • اختر مقاس الزي والحذاء الصحيح قبل إرسال الطلب.<br>
+                    • يمكن طلب الزي الرسمي من خلال هذه البوابة.
+
+                    <br><br>
+
+                    <b>الخصوصية</b><br><br>
+
+                    • يتم حماية بياناتك واستخدامها فقط للأغراض التشغيلية المصرح بها داخل الشركة.
+
+                    <br><br>
+
+
+
+
+                    <div dir="rtl" align="right">
+
+                        <b>الدعم الفني</b><br><br>
+
+                        • في حال واجهتك أي مشكلة تقنية أو كنت بحاجة إلى المساعدة، يمكنك التواصل مع فريق الدعم الفني عبر <b>Microsoft Teams</b>.<br>
+                        • سيقوم أحد موظفي الدعم بالرد على استفساراتك وتقديم المساعدة اللازمة.<br>
+                        • فريق الدعم الفني متاح للإجابة عن جميع أسئلتك والمساعدة في حل المشكلات المتعلقة بالبوابة.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- ===== PRIVACY MODAL ===== -->
+    <div class="simple-overlay" id="privacyModal">
+        <div class="simple-modal">
+            <div class="simple-close" onclick="closeSimpleModal('privacyModal')">✕</div>
+
+            <div class="simple-content">
+                <div class="simple-title">Privacy & Data Protection</div>
+
+
+
+                <b>Privacy & Data Protection</b><br><br>
+
+                This portal is designed to protect employee information and ensure the secure handling of all submitted data.
+                Personal information is collected and used only for authorized business purposes.
+                Access to employee data is limited to authorized personnel and managed in accordance with company policies.
+
+                <br><br>
+                <div dir="rtl">
+                    <b>الخصوصية وحماية البيانات</b><br><br>
+
+                    تم تصميم هذه البوابة لحماية بيانات الموظفين وضمان التعامل الآمن مع جميع المعلومات المقدمة.
+                    تُجمع البيانات الشخصية وتُستخدم فقط للأغراض التشغيلية المصرح بها داخل الشركة.
+                    ويقتصر الوصول إلى بيانات الموظفين على الأشخاص المخولين، مع الالتزام بسياسات الشركة في حماية المعلومات.
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- my requests popup  -->
+    <div class="simple-overlay" id="myRequestsPopup">
+
+        <div class="simple-modal">  
+            <div class="simple-close"
+                 onclick="closeMyRequests()">
+                 ✕
+            </div>
+
+            <div class="simple-title">
+
+                My Requests
+
+                <br>
+
+                طلباتي
+
+            </div>
+
+            <div id="requestsContainer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="simple-overlay" id="requestPopup">
+
+        <div class="simple-modal">
+
+            <div class="simple-close"
+                 onclick="closeRequestPopup()">
+
+                ✕
+
+            </div>
+
+            <div class="simple-title">
+
+                Request Details
+
+                <br>
+
+                تفاصيل الطلب
+
+            </div>
+
+            <div class="popup-form">
+
+                <div class="request-row">
+
+                    <b>Request No</b>
+
+                    <span id="popupRequestNo"></span>
+
+                </div>
+
+                <div class="request-row">
+
+                    <b>Request</b>
+
+                    <span id="popupRequestType"></span>
+
+                </div>
+
+                <div class="request-row">
+
+                    <b>Created</b>
+
+                    <span id="popupCreated"></span>
+
+                </div>
+
+                <div class="request-row">
+
+                    <b>Status</b>
+
+                    <span id="popupStatus"></span>
+
+                </div>
+
+                <div class="request-row">
+
+                    <b>Status Date</b>
+
+                    <span id="popupStatusDate"></span>
+
+                </div>
+
+                <div class="request-row">
+
+                    <b>Remarks</b>
+
+                    <span id="popupRemarks"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ===== BANK LOAN FULLSCREEN POP-UP ===== -->
+    <div class="simple-overlay" id="bankLoanPopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeBankLoanPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title" style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Bank Loan Request طلب قرض من البنك
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div class="popup-form"
+                 style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:25px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Bank Name <span>اسم البنك</span>
+                        </label>
+
+                        <input id="bankName"
+                               type="text"
+                               placeholder="Enter bank name / ادخل اسم البنك"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Loan Amount <span>مبلغ القرض</span>
+                        </label>
+
+                        <input id="loanAmount"
+                               type="number"
+                               placeholder="Enter requested amount / ادخل المبلغ المطلوب"
+                               style="border-radius:12px; border:2px solid #B4975B; appearance:textfield;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Loan Duration <span>مدة القرض</span>
+                        </label>
+
+                        <input id="loanDuration"
+                               type="text"
+                               placeholder="Enter loan duration / أدخل مدة القرض"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Purpose of Loan <span>سبب القرض</span>
+                        </label>
+
+                        <select id="loanPurpose" style="border-radius:12px; border:2px solid #B4975B;">
+                            <option value="">Select purpose / اختر السبب</option>
+                            <option value="Personal">Personal شخصي</option>
+                            <option value="Car Loan">Car Loan قرض سيارة</option>
+                            <option value="Home Loan">Home Loan قرض منزل</option>
+                            <option value="Other">Other أخرى</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-group">
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Additional Notes <span>ملاحظات أخرى</span>
+                    </label>
+
+                    <textarea id="loanNotes"
+                              rows="4"
+                              placeholder="Optional notes... / ملاحظات أخرى"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+
+                <!-- BUTTONS -->
+                <div class="buttons"
+                     style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button class="btn back"
+                            onclick="closeBankLoanPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> إغلاق
+                    </button>
+
+                    <button class="btn submit"
+                            onclick="submitLoanForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Send <br> إرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- ===== EMPLOYEE FEEDBACK POP-UP ===== -->
+    <div class="simple-overlay" id="employeeFeedbackPopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close"
+                 onclick="closeEmployeeFeedbackPopup()"
+                 style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Employee Feedback اراء الموظفين
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div class="popup-form"
+                 style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:25px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Department <span>القسم</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-dept"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-group">
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Overall Experience <span>تقييم التجربة</span>
+                    </label>
+
+                    <div class="rating-buttons"
+                         style="display:flex; gap:40px; flex-wrap:wrap; margin-top:10px;">
+
+                        <button class="rating-btn" data-value="1">😡</button>
+                        <button class="rating-btn" data-value="2">😕</button>
+                        <button class="rating-btn" data-value="3">😐</button>
+                        <button class="rating-btn" data-value="4">🙂</button>
+                        <button class="rating-btn" data-value="5">😃</button>
+
+                    </div>
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-group">
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Your Feedback <span>الرأي الشخصي</span>
+                    </label>
+
+                    <textarea rows="5"
+                              placeholder="Write your feedback here... / اكتب رأيك هنا"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons"
+                     style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button class="btn back"
+                            onclick="closeEmployeeFeedbackPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> إغلاق
+                    </button>
+
+                    <button class="btn submit"
+                            onclick="submitEmployeeFeedbackForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Send <br> إرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ===== ACCESS CARD REQUEST POP-UP ===== -->
+    <div class="simple-overlay" id="accessCardPopup">
+        <div class="simple-modal" style=" border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeAccessCardPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title" style="text-align:center;  font-weight:400; color:#413100; text-transform:uppercase;">Access Card Request طلب بطاقة دخول </div>
+            <div class="divider" style=" background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM BORDER CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:40px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+                    <div class="form-group" style="flex:1; ">
+                        <label style=" font-weight:400; margin-bottom:8px; display:block;">Employee Name<span>اسم الموظف</span></label>
+                        <input type="text" class="emp-name" style=" border-radius: 12px; border: 2px solid #B4975B; " readonly>
+                    </div>
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style=" font-weight:400; margin-bottom:8px; display:block;">Employee ID <span>رقم الموظف </span></label>
+                        <input type="text" class="emp-id" style=" border-radius: 12px; border: 2px solid #B4975B; " readonly>
+                    </div>
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style=" font-weight:400; margin-bottom:8px; display:block;">Department <span>القسم</span></label>
+                        <input type="text" class="emp-dept" style=" border-radius: 12px; border: 2px solid #B4975B; " readonly>
+                    </div>
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style=" font-weight:400; margin-bottom:8px; display:block;">Card Type <span>نوع البطاقة </span></label>
+                        <select style=" border-radius: 12px; border: 2px solid #B4975B; ">
+
+                            <option>Permanent       دائم </option>
+                            <option>Temporary       مؤقت </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ROW 3 FULL WIDTH -->
+                <div class="form-group">
+                    <label style=" font-weight:400; margin-bottom:8px; display:block;">Reason for Request <span>سبب الطلب </span></label>
+                    <textarea rows="6" placeholder="Explain why you need this card...  /  ...لماذا تريد البطاقه  " style=" border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+                    <button class="btn back" onclick="closeAccessCardPopup()" style="border-radius:12px; background:#ececec; ">Close <br> أغلاق </button>
+                    <button class="btn submit" onclick="submitAccessCardForm()" style=" border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white; ">Send<br>أرسال</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- ===== EXIT & RE-ENTRY POP-UP ===== -->
+    <div class="simple-overlay" id="exitPopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeExitPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Exit & Re-Entry Request خروج و أعادة دخول
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:20px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text" class="emp-name" readonly style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text" class="emp-id" readonly style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Department <span>القسم</span>
+                        </label>
+
+                        <input type="text" class="emp-dept" readonly style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Exit Type <span>نوع الخروج</span>
+                        </label>
+
+                        <select id="exitType"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Single Exit خروج واحد</option>
+                            <option>Multiple Exit خروج متعدد</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Exit Date <span>تاريخ الخروج</span>
+                        </label>
+
+                        <input id="exitDate" type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Return Date <span>تاريخ العودة</span>
+                        </label>
+
+                        <input id="returnDate" type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-group">
+
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Iqama Number <span>رقم الإقامة</span>
+                    </label>
+
+                    <div id="iqamaSelectBox"
+                         style="border-radius:12px; border:2px solid #B4975B; padding:10px; cursor:pointer;">
+                        اختر رقم الإقامة
+                    </div>
+
+                    <div id="iqamaDropdown"
+                         style="display:none; border:2px solid #B4975B; border-radius:12px; margin-top:5px; padding:10px; background:#fff; max-height:200px; overflow-y:auto;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 5 -->
+                <div class="form-group">
+
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Reason <span>سبب الذهاب</span>
+                    </label>
+
+                    <textarea id="reason"
+                              rows="6"
+                              placeholder="Explain reason... / ...سبب الذهاب"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeExitPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> أغلاق
+                    </button>
+
+                    <button onclick="submitExitForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Submit <br> أرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- ===== UNIFORM REQUEST POP-UP ===== -->
+    <div class="simple-overlay" id="uniformPopup">
+        <div class="simple-modal"
+             style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close"
+                 onclick="closeUniformPopup()"
+                 style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Uniform Request طلب زي رسمي
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div class="popup-form" style="padding:50px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               style="border-radius:12px; border:2px solid #B4975B;"
+                               readonly>
+                    </div>
+
+                    <div class="form-group" style="min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               style="border-radius:12px; border:2px solid #B4975B;"
+                               readonly>
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Department <span>القسم</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-dept"
+                               style="border-radius:12px; border:2px solid #B4975B;"
+                               readonly>
+                    </div>
+
+                    <div class="form-group" style="min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Uniform Size <span>مقاس اللبس</span>
+                        </label>
+
+                        <select id="uniformSize"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Small صغير</option>
+                            <option>Medium متوسط</option>
+                            <option>Large كبير</option>
+                            <option>XL</option>
+                            <option>XXL</option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <!-- ROW 3 -->
+                <div class="form-row">
+
+                    <div class="form-group" style="min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Shoe Size <span>مقاس الحذاء</span>
+                        </label>
+
+                        <select id="shoeSize"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option value="">Select shoe size / اختر المقاس</option>
+                            <option value="None">None</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Quantity <span>الكمية</span>
+                        </label>
+
+                        <input id="uniformQty"
+                               type="number"
+                               placeholder="Enter quantity / ادخل الكمية"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+
+                <!-- UNIFORM TYPE -->
+                <div class="form-group">
+
+                    <label style="font-weight:400; margin-bottom:12px; display:block;">
+                        Uniform Type <span>نوع الزي</span>
+                    </label>
+
+                    <div id="fish Monger"
+                         style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:15px;">
+
+                        <div class="uniform-card" data-value="Jacket" onclick="toggleUniform(this)" style="
+                border:2px solid #ddd; border-radius:15px; overflow:hidden; cursor:pointer; background:white;transition:.3s;">
+
+                            <img src="images/FishMonger.jpg" style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Fish Monger
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card" data-value="Tshirt" onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/maintenance.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Maintenance
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Decorator "
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/marketSV.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Decorator
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Merchandiser full time"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/merchandiserFullTime.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Merchandiser full time
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Merchandiser Part Time"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/merchandiserHHH.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Merchandiser Part time
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Opss stocker"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/OpssStocker.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Opss stocker
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Receving checker"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Receivingchecker.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Receving checker
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Sales HHH"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/salesmanHHH.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Sales HHH
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Services HHH SV"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/servicesHHH_sv.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Services HHH SV
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Stocker SV"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/stockerwoman.png"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Stocker SV
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Store GM/DH/SM "
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/storeGM.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Store GM/DH/SM
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Trolly Boy "
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/TrollyBoy.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Trolly Boy
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Bakery/Pastry"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Bakery.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Bakery/Pastry
+                            </div>
+                        </div>
+
+
+                        <div class="uniform-card"
+                             data-value="Cashier/Clerk"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/CashirSafeclerk.png"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Cashier/Clerk
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Sales woman"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Saleswoman.png"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Sales Woman
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value=" Administrative"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Administrative.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Administrative
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Butcher"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Butcher.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Butcher
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value=" CG, LHH SV"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Decorator.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                CG, LHH SV
+                            </div>
+
+                        </div>
+
+                        <div class="uniform-card"
+                             data-value="Deli/Roastery"
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Deli.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px; ">
+
+                            <div style="padding:12px; text-align:center;">
+                                Deli/Roastery
+                            </div>
+
+                        </div>
+                        <div class="uniform-card"
+                             data-value="Fruits & Vegetables "
+                             onclick="toggleUniform(this)"
+                             style="border:2px solid #ddd;border-radius:15px;overflow:hidden;cursor:pointer;background:white;transition:.3s;">
+
+                            <img src="images/Fruits_Vegitables.jpg"
+                                 style="width:100%;height:90px;object-fit:contain;padding:10px;">
+
+                            <div style="padding:12px; text-align:center;">
+                                Fruits & Vegetables
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- ROW 4 -->
+                    <div class="form-group">
+
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Reason <span>سبب الطلب</span>
+                        </label>
+
+                        <textarea id="uniformReason"
+                                  rows="5"
+                                  placeholder="Enter reason /  سبب الطلب"
+                                  style="width:100%; border-radius:12px; border:2px solid #B4975B; resize:none; padding:10px;">
+                       </textarea>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+                    <div class="buttons"
+                         style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                        <button class="btn back"
+                                onclick="closeUniformPopup()"
+                                style="border-radius:12px; background:#ececec;">
+
+                            Close <br> أغلاق
+
+                        </button>
+
+                        <button type="button"
+                                class="btn submit"
+                                onclick="submitUniformForm()"
+                                style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                            Submit <br> أرسال
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ===== SALARY DECLARATION POP-UP ===== -->
+    <div class="simple-overlay" id="salaryPopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeSalaryPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title" style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Salary Declaration تعريف بالراتب
+            </div>
+
+            <div class="divider" style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:20px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Department <span>القسم</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-dept"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Purpose <span>السبب</span>
+                        </label>
+
+                        <select id="salaryPurpose"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Bank البنك</option>
+                            <option>Embassy السفارة</option>
+                            <option>Personal Use استخدام شخصي</option>
+                            <option>Other اخرى</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-group">
+                    <label style="font-weight:400; display:block; margin-bottom:8px;">
+                        Additional Notes <span>ملاحظات اخرى</span>
+                    </label>
+
+                    <textarea id="salaryNotes"
+                              rows="4"
+                              placeholder="Optional notes... / ...ملاحظات اخرى"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeSalaryPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> أغلاق
+                    </button>
+
+                    <button onclick="submitSalaryForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Send <br> أرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ===== EXPERIENCE CERTIFICATE POP-UP ===== -->
+    <div class="simple-overlay" id="experiencePopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeExperiencePopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title" style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Experience Certificate Request طلب شهادة خبرة
+            </div>
+
+            <div class="divider" style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:20px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee Name <span>أسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Department <span>القسم</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-dept"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Certificate Language <span>لغة الشهادة</span>
+                        </label>
+
+                        <select id="certificateLanguage"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Arabic العربية</option>
+                            <option>English الانجليزية</option>
+                            <option>Bilingual مزدوجة</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employment Start Date <span>تاريخ بدء العمل</span>
+                        </label>
+
+                        <input id="startDate"
+                               type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employment End Date <span>تاريخ نهاية العمل</span>
+                        </label>
+
+                        <input id="endDate"
+                               type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-group">
+                    <label style="font-weight:400; display:block; margin-bottom:8px;">
+                        Additional Notes <span>ملاحظات أخرى</span>
+                    </label>
+
+                    <textarea id="experienceNotes"
+                              rows="4"
+                              placeholder="Optional notes... / ...ملاحظات أخرى"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeExperiencePopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> أغلاق
+                    </button>
+
+                    <button onclick="submitExperienceForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Send <br> أرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- ===== FAMILY VISIT VISA POP-UP ===== -->
+    <div class="simple-overlay" id="familyPopup">
+
+        <div class="simple-modal"
+             style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeFamilyPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Family Visit Visa Request طلب تأشيرة زيارة عائلية
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:20px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee Name
+                            <span>أسم الموظف</span>
+                        </label>
+
+                        <input id="empName" type="text" class="emp-name" readonly style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee ID
+                            <span>رقم الموظف</span>
+                        </label>
+
+                        <input id="empNo" type="text" class="emp-id" readonly style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 3 -->
+                <div class="form-group">
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+
+                        <label style="font-weight:500;">
+                            Visitors Information
+                            <span>بيانات الزوار</span>
+                        </label>
+
+                        <button type="button"
+                                onclick="addVisitorRow()" style="
+                    border:none; border-radius:12px; background:#B4975B; color:white; padding:10px 18px; cursor:pointer; ">
+                            + Add Visitor
+                        </button>
+
+                    </div>
+
+                    <div id="visitorsContainer" style="display:flex; flex-direction:column; gap:15px;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Arrival Date    <span>تاريخ الوصول</span>
+                        </label>
+
+                        <input id="arrivalDate" type="date" style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Duration of Stay <span>مدة الإقامة</span>
+                        </label>
+
+                        <input id="duration" type="number" placeholder="عدد الأيام" style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+                </div>
+
+                <!-- NOTES -->
+                <div class="form-group">
+
+                    <label style="font-weight:400; display:block; margin-bottom:8px;">
+                        Additional Notes
+                        <span>ملاحظات أخرى</span>
+                    </label>
+
+                    <textarea id="notes"
+                              rows="4"
+                              placeholder="Optional notes"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeFamilyPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> إغلاق
+                    </button>
+
+                    <button onclick="submitFamilyForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Submit <br> إرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- ===== ISSUE MOBILE SIM POP-UP ===== -->
+    <div class="simple-overlay" id="simPopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE BUTTON -->
+            <div class="simple-close" onclick="closeSimPopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Issue Mobile SIM Request أصدار شريحة جوال
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:20px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee Name
+                            <span>أسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Employee ID
+                            <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Department
+                            <span>القسم</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-dept"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            SIM Type
+                            <span>نوع الشريحة</span>
+                        </label>
+
+                        <select id="simType" style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>New SIM شريحة جديدة</option>
+                            <option>Replacement SIM استبدال</option>
+                            <option>Upgrade to 5G ترقية</option>
+                        </select>
+
+
+
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Mobile Number (If Replacement)
+                            <span>(رقم الجوال (اذا كان أستبدال</span>
+                        </label>
+
+                        <input id="mobileNumber"
+                               type="text"
+                               placeholder="Enter current number / أدخل الرقم الحالي"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+
+                        <label style="font-weight:400; display:block; margin-bottom:8px;">
+                            Preferred Network
+                            <span>الشبكة المطلوبة</span>
+                        </label>
+
+                        <select id="preferredNetwork"
+                                style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Mobily</option>
+                            <option>STC</option>
+                            <option>Zain</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-group">
+
+                    <label style="font-weight:400; display:block; margin-bottom:8px;">
+                        Additional Notes
+                        <span>ملاحظات أخرى</span>
+                    </label>
+
+                    <textarea id="simNotes"
+                              rows="4"
+                              placeholder="Optional notes... / ...ملاحظات أخرى"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons" style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeSimPopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> أغلاق
+                    </button>
+
+                    <button onclick="submitSimForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Submit <br> أرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- ===== LEAVE REQUEST POP-UP ===== -->
+    <div class="simple-overlay" id="leavePopup">
+        <div class="simple-modal" style="border-radius:25px; border:5px solid #5A3E1B; background:#fff; overflow-y:auto;">
+
+            <!-- CLOSE -->
+            <div class="simple-close" onclick="closeLeavePopup()" style="cursor:pointer;">✕</div>
+
+            <!-- TITLE -->
+            <div class="title"
+                 style="text-align:center; font-weight:400; color:#413100; text-transform:uppercase;">
+                Leave Request طلب إجازة
+            </div>
+
+            <div class="divider"
+                 style="background:#B4975B; margin:20px auto 45px; border-radius:4px;"></div>
+
+            <!-- FORM CONTAINER -->
+            <div class="popup-form"
+                 style="border:4px solid #5A3E1B; border-radius:20px; padding:50px; display:flex; flex-direction:column; gap:25px;">
+
+                <!-- ROW 1 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee Name <span>اسم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-name"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Employee ID <span>رقم الموظف</span>
+                        </label>
+
+                        <input type="text"
+                               class="emp-id"
+                               readonly
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 2 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Leave Type <span>نوع الإجازة</span>
+                        </label>
+
+                        <select style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Annual سنوية</option>
+                            <option>Sick مرضية</option>
+                            <option>Emergency طارئة</option>
+                            <option>Unpaid بدون راتب</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Duration <span>المدة</span>
+                        </label>
+
+                        <select style="border-radius:12px; border:2px solid #B4975B;">
+                            <option>Full Day يوم كامل</option>
+                            <option>Half Day نصف يوم</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ROW 3 -->
+                <div class="form-row" style="display:flex; gap:50px; flex-wrap:wrap;">
+
+                    <div class="form-group" style="flex:1;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            Start Date <span>تاريخ البداية</span>
+                        </label>
+
+                        <input type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                    <div class="form-group" style="flex:1; min-width:350px;">
+                        <label style="font-weight:400; margin-bottom:8px; display:block;">
+                            End Date <span>تاريخ النهاية</span>
+                        </label>
+
+                        <input type="date"
+                               style="border-radius:12px; border:2px solid #B4975B;">
+                    </div>
+
+                </div>
+
+                <!-- ROW 4 -->
+                <div class="form-group">
+                    <label style="font-weight:400; margin-bottom:8px; display:block;">
+                        Reason <span>سبب الإجازة</span>
+                    </label>
+
+                    <textarea rows="4"
+                              placeholder="Write reason... / اكتب السبب"
+                              style="border-radius:12px; border:2px solid #B4975B; resize:none;"></textarea>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="buttons"
+                     style="margin-top:40px; display:flex; justify-content:flex-end; gap:25px;">
+
+                    <button onclick="closeLeavePopup()"
+                            style="border-radius:12px; background:#ececec;">
+                        Close <br> إغلاق
+                    </button>
+
+                    <button onclick="submitLeaveForm()"
+                            style="border-radius:12px; background:linear-gradient(135deg,#413100,#B4975B); color:white;">
+                        Send <br> إرسال
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- ===== COMING SOON POPUP ===== -->
+    <div class="simple-overlay" id="comingSoonPopup">
+        <div class="simple-modal" style="
+        width: 550px;
+        max-width: 90%;
+        text-align: center;
+        border: 4px solid #5A3E1B;
+        border-radius: 25px;
+        padding: 40px;
+    ">
+
+            <!-- Close -->
+            <div class="simple-close" onclick="closeComingSoonPopup()"
+                 style="font-size:32px; cursor:pointer;">✕</div>
+
+            <!-- Title -->
+            <div style="
+            font-size: 36px;
+            font-weight: 900;
+            color: #413100;
+            margin-bottom: 20px;
+        ">
+                Coming Soon
+            </div>
+
+            <div style="
+            width: 100px;
+            height: 5px;
+            background: #B4975B;
+            margin: 15px auto 30px;
+            border-radius: 4px;
+        "></div>
+
+            <!-- Message -->
+            <div style="
+            font-size: 24px;
+            line-height: 1.8;
+            color: #413100;
+            font-weight: 600;
+        ">
+                Sorry, this page will be available soon
+                <br><br>
+                عذرًا، الصفحة ستكون متاحة قريبًا
+            </div>
+
+            <!-- Button -->
+            <div style="margin-top:30px;">
+                <button onclick="closeComingSoonPopup()" style="
+                padding: 14px 35px;
+                border-radius: 12px;
+                border: none;
+                font-size: 18px;
+                color: white;
+                cursor: pointer;
+                background: linear-gradient(135deg,#413100,#B4975B);
+            ">
+                    Close <br> إغلاق
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div id="sessionWarning" class="simple-overlay">
+        <div class="simple-modal" style="text-align:center; width:500px;">
+
+            <h2 style="color:#413100;">Session Expiring</h2>
+
+            <p style="font-size:20px; margin:20px 0;">
+                You will be logged out in
+                <span id="countdown">10</span> seconds
+            </p>
+
+            <div style="display:flex; justify-content:center; gap:20px;">
+                <button onclick="extendSession()"
+                        style="padding:12px 25px; border:none; border-radius:10px; background:#B4975B; color:#fff;">
+                    Continue
+                </button>
+
+                <button onclick="forceLogout()"
+                        style="padding:12px 25px; border:none; border-radius:10px; background:#ccc;">
+                    Logout
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script>
+
+        //my request pop up
+        let requests = [];
+
+        async function openMyRequests() {
+
+        
+            const empNo = sessionStorage.getItem("empNo");
+
+            
+
+
+
+            const res = await fetch(
+                `http://10.240.112.61:5090/api/EmployeeRequests/my-requests/${empNo}`);
+
+            requests = await res.json();
+
+            const container = document.getElementById("requestsContainer");
+
+            container.innerHTML = "";
+
+            requests.forEach(item => {
+
+                const status = getStatusInfo(item.status);
+
+                container.innerHTML += `
+
+<div class="request-card">
+
+<h3>${item.requestName}</h3>
+
+<div class="request-row">
+
+<strong>Request No</strong>
+
+<span>${item.requestNo}</span>
+
+</div>
+
+<div class="request-row">
+
+<strong>Status</strong>
+
+<span class="${status.class}">
+${status.text}
+</span>
+
+</div>
+
+<div class="request-row">
+
+<strong>Created</strong>
+
+<span>${formatDate(item.createdDate)}</span>
+
+</div>
+
+<div class="request-actions">
+
+<button onclick="showRequestDetails(${item.requestNo})">
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+            });
+
+            document.getElementById("myRequestsPopup")
+                .classList.add("active");
+
+        }
+
+
+
+
+        function showRequestDetails(requestNo) {
+
+            const item = requests.find(x => x.requestNo == requestNo);
+
+            if (!item) return;
+
+            const status = getStatusInfo(item.status);
+
+            document.getElementById("popupRequestNo").innerHTML = item.requestNo;
+
+            document.getElementById("popupRequestType").innerHTML = item.requestName;
+
+            document.getElementById("popupCreated").innerHTML =
+                formatDate(item.createdDate);
+
+            document.getElementById("popupStatusDate").innerHTML =
+                item.statusDate ?
+                    formatDate(item.statusDate) : "-";
+
+            document.getElementById("popupRemarks").innerHTML =
+                item.statusRemarks || "-";
+
+            document.getElementById("popupStatus").innerHTML =
+
+                `<span class="${status.class}">
+${status.text}
+</span>`;
+
+            document.getElementById("requestPopup")
+                .classList.add("active");
+
+        }
+
+        function closeRequestPopup() {
+
+            document.getElementById("requestPopup")
+                .classList.remove("active");
+
+        }
+
+
+
+
+
+        function getStatusInfo(status) {
+
+            switch (status) {
+
+                case "Open":
+                    return { text: "Open", class: "status-open" };
+
+                case "Approved":
+                    return { text: "Approved", class: "status-approved" };
+
+                case "Rejected":
+                    return { text: "Rejected", class: "status-rejected" };
+
+                case "Completed":
+                    return { text: "Completed", class: "status-completed" };
+
+                case "In Progress":
+                    return { text: "In Progress", class: "status-progress" };
+
+                default:
+                    return { text: status, class: "status-open" };
+            }
+        }
+
+
+
+
+
+        function closeMyRequests() {
+            document.getElementById("myRequestsPopup").classList.remove("active");
+        }
+
+
+
+
+        function formatDate(date) {
+
+            if (!date) return "-";
+
+            return new Date(date).toLocaleString("en-GB");
+
+        }
+
+
+
+
+
+
+
+
+
+
+        let sessionTimer;
+        let warningTimer;
+        let countdownTimer;
+
+        const sessionTime = 180000;   //دقيقتين
+        const warningTime = 120000;   // بعد 20 ثانية يظهر التحذير
+        let countdown = 100;
+
+        function startSessionTimer() {
+            clearTimeout(sessionTimer);
+            clearTimeout(warningTimer);
+
+            // يظهر التحذير
+            warningTimer = setTimeout(showWarning, warningTime);
+
+            // تسجيل الخروج النهائي
+            sessionTimer = setTimeout(forceLogout, sessionTime);
+        }
+
+        function showWarning() {
+            document.getElementById("sessionWarning").classList.add("active");
+
+            countdown = 10;
+            document.getElementById("countdown").innerText = countdown;
+
+            countdownTimer = setInterval(() => {
+                countdown--;
+                document.getElementById("countdown").innerText = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+        }
+
+        function extendSession() {
+            document.getElementById("sessionWarning").classList.remove("active");
+            clearInterval(countdownTimer);
+            startSessionTimer();
+        }
+
+        function forceLogout() {
+            clearInterval(countdownTimer);
+
+            sessionStorage.clear();
+            localStorage.clear();
+
+            window.location.replace("index.html");
+        }
+
+        function resetSession() {
+            startSessionTimer();
+        }
+
+        // تتبع نشاط المستخدم
+        window.onload = startSessionTimer;
+        document.onmousemove = resetSession;
+        document.onkeypress = resetSession;
+        document.onclick = resetSession;
+        document.onscroll = resetSession;
+        document.ontouchstart = resetSession;
+    </script>
+
+
+
+    <style>
+        .teams-box {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            text-align: center;
+            z-index: 9998;
+        }
+
+            /* صورة اللوقو */
+            .teams-box img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                cursor: pointer;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+                transition: 0.3s;
+            }
+
+                .teams-box img:hover {
+                    transform: scale(1.1);
+                }
+
+            /* 🔥 النص الجديد */
+            .teams-box p {
+                margin-top: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                color: #B4975B;
+                letter-spacing: 1px;
+                padding: 6px 14px;
+                border-radius: 20px;
+                background: rgba(180,151,91,0.12);
+                backdrop-filter: blur(6px);
+                display: inline-block;
+                transition: 0.3s;
+            }
+
+            /* Hover احترافي */
+            .teams-box:hover p {
+                background: linear-gradient(135deg,#413100,#B4975B);
+                color: white;
+                box-shadow: 0 5px 15px rgba(180,151,91,0.4);
+                transform: translateY(-2px);
+            }
+    </style>
+
+
+    <div class="teams-box">
+        <a href="msteams://teams.microsoft.com/meet/322936653069107?p=aT3143XLJP7XwVo6KT">
+            <img src="images/icons8-microsoft-teams-2019-48.png" alt="Teams">
+            <p>Connect Us</p>
+        </a>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const name = sessionStorage.getItem("name");
+            const empNo = sessionStorage.getItem("empNo");
+            const dept = sessionStorage.getItem("department");
+
+            if (!empNo) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            document.getElementById("empName").innerText = name;
+            document.getElementById("empNo").innerText = empNo;
+            document.getElementById("empDept").innerText = dept;
+
+        });
+    </script>
+
+
+
+
+</body>
+
+
+
+</html>
+  
